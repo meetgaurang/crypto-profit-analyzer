@@ -1,4 +1,3 @@
-import { string } from "prop-types"
 
 export interface IHistoricDataAPIResponse {
     records: IHistoricRecord[];
@@ -11,6 +10,6 @@ export interface IHistoricRecord {
 }
 
 export interface IQuote {
-    time: string;
-    price: number;
+    time?: string;
+    price?: number;
 }
