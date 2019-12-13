@@ -1,3 +1,4 @@
+import {IQuote} from "../../api/HistoricDataAPI.types";
 
 
 export interface IDateWiseRecord {
@@ -6,9 +7,7 @@ export interface IDateWiseRecord {
 }
 export interface IProfitRecord {
     currency?: string;
-    buyPrice?: number;
-    buyTime?: string;
-    sellPrice?: number;
-    sellTime?: string;
-    profit?: number
+    buyDetails?: IQuote;
+    sellDetails?: IQuote;
+    profit?: number;
 }
