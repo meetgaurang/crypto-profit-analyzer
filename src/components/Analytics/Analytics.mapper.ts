@@ -52,59 +52,69 @@ export class AnalyticsMapper {
     }*/
 
     mapEachRecord(input: IHistoricRecord): IProfitRecord {
-        let potentialBuyAmount;
-        let potentialBuyTime;
+        let potentialBuy: IQuote = {};
         let maxProfit;
-        let output: IProfitRecord = {};
+        let output: IProfitRecord = {
+            buyDetails: {},
+            sellDetails: {}
+        };
         output.currency = input.currency;
 
-        output.buyPrice = input.quotes[0].price;
-        output.buyTime = input.quotes[0].time;
+        this.assignQuote(output.buyDetails, input.quotes[0]);
         for (let i = 1; i < input.quotes.length; i++) {
-            // Check if buyPrice should be changed
-            if (input.quotes[i].price <= output.buyPrice) {
+            // If next price is less than potentialBuyPrice
+            if (!!potentialBuy.price && input.quotes[i].price <= potentialBuy.price) {
+                this.assignQuote(potentialBuy, input.quotes[i]);
+            }
+            // If next price is less than buyPrice
+            else if (!potentialBuy.price && input.quotes[i].price <= output.buyDetails.price) {
                 if (!!maxProfit) {
-                    potentialBuyAmount = input.quotes[i].price;
-                    potentialBuyTime = input.quotes[i].time;
+                    this.assignQuote(potentialBuy, input.quotes[i]);
                 } else {
-                    output.buyPrice = input.quotes[i].price;
-                    output.buyTime = input.quotes[i].time;
+                    this.assignQuote(output.buyDetails, input.quotes[i]);
                 }
-            } else {
+            }
+            // If next price is greater than buyprice
+            else {
                 if (!!maxProfit) {
-                    if (!!potentialBuyAmount) {
-                        // If max profit can be achieved with potentialBuyAmount, redefine buy and sell price
-                        if (input.quotes[i].price - potentialBuyAmount > maxProfit) {
-                            output.buyPrice = potentialBuyAmount;
-                            output.buyTime = potentialBuyTime;
-                            output.sellPrice = input.quotes[i].price;
-                            output.sellTime = input.quotes[i].time;
-                            maxProfit = output.sellPrice - output.buyPrice;
-                            potentialBuyTime = undefined;
-                            potentialBuyAmount = undefined;
+                    if (!!potentialBuy.price) {
+                        // If max profit can be achieved with potentialBuy.price, redefine buy and sell price
+                        if (input.quotes[i].price - potentialBuy.price > maxProfit) {
+                            this.assignQuote(output.buyDetails, potentialBuy);
+                            this.assignQuote(output.sellDetails, input.quotes[i]);
+                            maxProfit = output.sellDetails.price - output.buyDetails.price;
+                            this.assignQuote(potentialBuy, undefined);
                         }    
                     } else {
-                        // In an absence of potentialBuyAmountpotentialBuyAmount, see if you need to redefine sellPrice
-                        if (input.quotes[i].price - output.buyPrice > maxProfit) {
-                            output.sellPrice = input.quotes[i].price;
-                            output.sellTime = input.quotes[i].time;
-                            maxProfit = output.sellPrice - output.buyPrice;    
+                        // In an absence of potentialBuy.price, see if you need to redefine sellPrice
+                        if (input.quotes[i].price - output.buyDetails.price > maxProfit) {
+                            this.assignQuote(output.sellDetails, input.quotes[i]);
+                            maxProfit = output.sellDetails.price - output.buyDetails.price;
                         }
                     }
                 } else {
                     // In an absence of maxProfit, just redefine sell price
-                    output.sellPrice = input.quotes[i].price;
-                    output.sellTime = input.quotes[i].time;
-                    maxProfit = output.sellPrice - output.buyPrice;
+                    this.assignQuote(output.sellDetails, input.quotes[i]);
+                    maxProfit = output.sellDetails.price - output.buyDetails.price;
                 }
             }
         }
-        if (_.isEmpty(maxProfit)) {
-            output.buyPrice = undefined;
-            output.buyTime = undefined;
+        // If prices were in descending order for the given day then not possible to book profit
+        if (_.isUndefined(maxProfit)) {
+            this.assignQuote(output.buyDetails, undefined);
         } else {
-            output.profit = maxProfit;
+            output.profit = Math.round(maxProfit * 100) / 100;
         }
         return output;
+    }
+
+    assignQuote(fromQuote: IQuote, toQuote: IQuote) {
+        if (toQuote == undefined) {
+            fromQuote.price = undefined;
+            fromQuote.time = undefined;
+        } else {
+            fromQuote.price = toQuote.price;
+            fromQuote.time = toQuote.time;
+        }
     }
 }
