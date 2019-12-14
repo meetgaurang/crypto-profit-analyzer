@@ -1,5 +1,6 @@
 import { IAnalyticsStore } from "./types";
 import { ANALYTICS_ACTION_TYPES } from "./actionTypes";
+import { AnalyticsMapper } from "../components/Analytics/Analytics.mapper";
 
 const initialState: IAnalyticsStore = {
     apiSuccess: false,
@@ -29,12 +30,13 @@ export const reducers = (state = initialState, action: any) => {
             }
         }
         case ANALYTICS_ACTION_TYPES.GET_HISTORIC_DATA_REQUEST_SUCCESS: {
+            const mapper = new AnalyticsMapper();
             return {
                 ...state,
                 apiSuccess: true,
                 apiFailure: false,
                 apiRequestInProgress: false,
-                records: []
+                records: mapper.mapResponse(action.payload)
             }
         }
         default:

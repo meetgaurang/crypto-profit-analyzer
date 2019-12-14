@@ -17,7 +17,7 @@ export const HistoricDataAPI = {
     async getMockedHistoricData(): Promise<IHistoricDataAPIResponse> {
         const promise: Promise<IHistoricDataAPIResponse> = new Promise(function (resolve, reject) {
             window.setTimeout(() => {
-                resolve(JSON.parse(mockedResponse.toString()));
+                resolve(<any>mockedResponse);
             }, 500);
         });
         return promise;
