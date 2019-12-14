@@ -16,7 +16,7 @@ export const Welcome = () => {
         <>
             <ContainerDiv>
                 <h2>
-                    Welcome to Cryptocurrency Data Analyser!
+                    Welcome to Cryptocurrency Price Analytics!
                     </h2>
                 <div>
                     <Button variant="contained" color="primary" startIcon={<ChevronRightIcon />} onClick={routeToAnalytics}>
