@@ -2,7 +2,7 @@
     "records": [
         {
             "currency": "BTC",
-            "date": "20180507",
+            "date": "20180506",
             "quotes": [
                 {
                     "time": "0915",
@@ -28,7 +28,7 @@
         },
         {
             "currency": "ETC",
-            "date": "20180507",
+            "date": "20180506",
             "quotes": [
                 {
                     "time": "0900",
@@ -54,7 +54,7 @@
         },
         {
             "currency": "LTC",
-            "date": "20180507",
+            "date": "20180506",
             "quotes": [
                 {
                     "time": "0930",
@@ -80,7 +80,7 @@
         },
         {
             "currency": "BTC",
-            "date": "20180506",
+            "date": "20180507",
             "quotes": [
                 {
                     "time": "0930",
