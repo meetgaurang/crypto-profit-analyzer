@@ -21,5 +21,8 @@ describe("<Welcome />", () => {
 
         const wrapper = shallow(<Welcome />);
         expect(wrapper).toBeDefined();
+        const getStartedClickHandler = wrapper.find('div').getElement().props.children.props.onClick;
+        getStartedClickHandler();
+        expect(mockedFunc).toBeCalledTimes(1);
     });
 });
