@@ -19,24 +19,21 @@ import { getHistoricData } from '../../store/actions';
 import { IDateWiseRecord, IProfitRecord } from './Analytics.types';
 import { DateBarDiv, CustomGrid } from './Analytics.styles';
 
-export class Analytics extends React.Component<any> {
-    constructor(props: any) {
-        super(props);
-    }
+export const Analytics = (props: any) => {
 
-    componentDidMount() {
-        this.props.getHistoricData();
-    }
+    useEffect(() => {
+        props.getHistoricData();
+    }, []);
 
-    public renderCurrencyList = (profitList: IProfitRecord[]) => {
+    const renderCurrencyList = (profitList: IProfitRecord[]) => {
         return profitList.map((eachProfitItem: IProfitRecord, index: number) => {
             return (
-                <Grid item xs={12} sm={4} md={3} lg={3} xl={2}>
+                <Grid item xs={12} sm={4} md={3} lg={3} xl={2} key={index}>
                     <Card key={index} style={{height: "100%"}}>
                         <CardContent style={{textAlign: "center"}}>
                             <Grid container spacing={1}>
                                 <CustomGrid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                                    {this.iconMapping(eachProfitItem.currency)}
+                                    {iconMapping(eachProfitItem.currency)}
                                     <span style={{paddingLeft: "5px"}}>
                                         {eachProfitItem.currency}
                                     </span>
@@ -86,10 +83,10 @@ export class Analytics extends React.Component<any> {
                 </Grid>
             );
         });
-    } 
+    }
 
-    public renderRecords = () => {
-        return this.props.records.map((eachRecord: IDateWiseRecord, index: number) => {
+    const renderRecords = () => {
+        return props.records.map((eachRecord: IDateWiseRecord, index: number) => {
             return (
                 <div key={index}>
                     <DateBarDiv> 
@@ -97,24 +94,14 @@ export class Analytics extends React.Component<any> {
                         {moment(eachRecord.date, 'YYYY-MM-DD').format('LL')}
                     </DateBarDiv>
                     <Grid container spacing={2}> 
-                        {this.renderCurrencyList(eachRecord.profitList)}
+                        {renderCurrencyList(eachRecord.profitList)}
                     </Grid>
                 </div>
             );
         });
     }
 
-    render () {
-        return (
-            <>
-                {this.props.apiSuccess && <div>{this.renderRecords()}</div>}
-                {this.props.apiFailure && <div>API call failed</div>}
-                {this.props.apiReuestInProgress && <div>Loading..</div>}
-            </>
-        );
-    }
-
-    iconMapping(currency: string) {
+    const iconMapping = (currency: string) => {
         switch(currency) {
             case 'BTC': {
                 return <Icon icon={BTC} width="2em" height="2em"/>
@@ -130,7 +117,15 @@ export class Analytics extends React.Component<any> {
             }
         }
     }
-}
+
+    return (
+        <>
+            {props.apiSuccess && <div>{renderRecords()}</div>}
+            {props.apiFailure && <div>API call failed</div>}
+            {props.apiReuestInProgress && <div>Loading..</div>}
+        </>
+    );
+};
 
 const mapStateToProps = (state: any) => {
     return {
