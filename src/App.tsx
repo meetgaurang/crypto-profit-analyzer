@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, BrowserRouter, HashRouter } from 'react-router-dom';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -24,7 +24,7 @@ export class App extends React.Component {
                     </Toolbar>
                 </AppBar>
                 <Provider store={store}>
-                    <HashRouter>
+                    <BrowserRouter basename="/crypto">
                         <Switch>
                             <Route 
                                 path="/"
@@ -36,7 +36,7 @@ export class App extends React.Component {
                                 component={Analytics}
                             />
                         </Switch>
-                    </HashRouter>
+                    </BrowserRouter>
                 </Provider>
             </>
         );
