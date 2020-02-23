@@ -26,6 +26,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:nowatch": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
     "deploy": "aws s3 sync build/ s3://crypto-profit-analyzer"
   },
@@ -58,6 +59,9 @@
     "@types/styled-components": "^4.4.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1"
+  },
+  "jest": {
+    "coverageReporters": ["text", "cobertura"]
   },
   "homepage": "."
 }
