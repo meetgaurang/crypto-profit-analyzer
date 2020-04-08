@@ -8,6 +8,17 @@ export function configureStore() {
         analyticsReducer: reducers
     });
 
-    return createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+    const myCustomMiddleware = (store: any) => {
+        return (next: any) => {
+            return (action: any) => {
+                console.log('[Middleware] Action to be dispatched ', action);
+                const result = next(action);
+                console.log('[Middleware] next state ', store.getState());
+                return result;
+            };
+        };
+    };
+
+    return createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, myCustomMiddleware)));
 }
 
