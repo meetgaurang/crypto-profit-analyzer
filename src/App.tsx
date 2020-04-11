@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, BrowserRouter, HashRouter } from 'react-router-dom';
+import { Switch, Route, HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -18,23 +18,14 @@ export class App extends React.Component {
                         <IconButton edge="start" color="inherit" aria-label="menu">
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h6">
-                            Crypto Price Analytics
-                        </Typography>
+                        <Typography variant="h6">Crypto Price Analytics</Typography>
                     </Toolbar>
                 </AppBar>
                 <Provider store={store}>
                     <HashRouter>
                         <Switch>
-                            <Route 
-                                path="/"
-                                exact={true}
-                                component={Welcome}
-                            />
-                            <Route 
-                                path="/analytics"
-                                component={Analytics}
-                            />
+                            <Route path="/" exact={true} component={Welcome} />
+                            <Route path="/analytics" component={Analytics} />
                         </Switch>
                     </HashRouter>
                 </Provider>
