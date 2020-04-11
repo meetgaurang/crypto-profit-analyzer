@@ -28,10 +28,9 @@
     "test": "react-scripts test",
     "test:nowatch": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
-    "deploy": "aws s3 sync build/ s3://crypto-profit-analyzer"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "deploy": "aws s3 sync build/ s3://crypto-profit-analyzer",
+    "lint": "./node_modules/.bin/eslint --ext .ts,.tsx . && echo 'Lint complete.'",
+    "lint:fix": "./node_modules/.bin/eslint --fix --ext .ts,.tsx . && echo 'Lint complete.'"
   },
   "browserslist": {
     "production": [
@@ -57,11 +56,21 @@
     "@types/react-redux": "^7.1.5",
     "@types/react-router-dom": "^5.1.3",
     "@types/styled-components": "^4.4.1",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
     "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1"
+    "enzyme-adapter-react-16": "^1.15.1",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "prettier": "^2.0.4"
   },
   "jest": {
-    "coverageReporters": ["text", "cobertura"]
+    "coverageReporters": [
+      "text",
+      "cobertura"
+    ]
   },
   "homepage": "."
 }
