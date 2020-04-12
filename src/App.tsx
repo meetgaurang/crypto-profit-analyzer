@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Switch, Route, HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import { Welcome } from './components/Welcome/Welcome';
-import Analytics from './components/Analytics/Analytics';
 import { configureStore } from './store/configureStore';
+
+const Analytics = lazy(() => import('./components/Analytics/Analytics'));
 
 export class App extends React.Component {
     render() {
@@ -23,10 +24,12 @@ export class App extends React.Component {
                 </AppBar>
                 <Provider store={store}>
                     <HashRouter>
-                        <Switch>
-                            <Route path="/" exact={true} component={Welcome} />
-                            <Route path="/analytics" component={Analytics} />
-                        </Switch>
+                        <Suspense fallback={<div> Loading.. </div>}>
+                            <Switch>
+                                <Route path="/" exact={true} component={Welcome} />
+                                <Route path="/analytics" component={Analytics} />
+                            </Switch>
+                        </Suspense>
                     </HashRouter>
                 </Provider>
             </>
