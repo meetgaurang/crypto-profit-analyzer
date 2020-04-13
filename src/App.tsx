@@ -7,12 +7,16 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { Welcome } from './components/Welcome/Welcome';
 import Analytics from './components/Analytics/Analytics';
 import { configureStore } from './store/configureStore';
+import { UserContext } from './utils/UserContext';
 
 export class App extends React.Component {
     render() {
         const store = configureStore();
         return (
-            <>
+            <UserContext.Provider value={{
+                id: '1234',
+                name: 'Heer Patel'
+            }}>
                 <AppBar position="static">
                     <Toolbar>
                         <IconButton edge="start" color="inherit" aria-label="menu">
@@ -29,7 +33,7 @@ export class App extends React.Component {
                         </Switch>
                     </HashRouter>
                 </Provider>
-            </>
+            </UserContext.Provider>
         );
     }
 }
