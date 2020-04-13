@@ -1,24 +1,24 @@
-import { IAnalyticsStore } from "./types";
-import { ANALYTICS_ACTION_TYPES } from "./actionTypes";
-import { AnalyticsMapper } from "../components/Analytics/Analytics.mapper";
+import { AnalyticsStore } from './types';
+import { ANALYTICS_ACTION_TYPES } from './actionTypes';
+import { AnalyticsMapper } from '../components/Analytics/Analytics.mapper';
 
-const initialState: IAnalyticsStore = {
+const initialState: AnalyticsStore = {
     apiSuccess: false,
     apiFailure: false,
     apiRequestInProgress: false,
-    records: []
+    records: [],
 };
 
 export const reducers = (state = initialState, action: any) => {
-    switch(action.type) {
+    switch (action.type) {
         case ANALYTICS_ACTION_TYPES.GET_HISTORIC_DATA_REQUEST_IN_PROGRESS: {
             return {
                 ...state,
                 apiSuccess: false,
                 apiFailure: false,
                 apiRequestInProgress: true,
-                records: []
-            }
+                records: [],
+            };
         }
         case ANALYTICS_ACTION_TYPES.GET_HISTORIC_DATA_REQUEST_FAILURE: {
             return {
@@ -26,8 +26,8 @@ export const reducers = (state = initialState, action: any) => {
                 apiSuccess: false,
                 apiFailure: true,
                 apiRequestInProgress: false,
-                records: []
-            }
+                records: [],
+            };
         }
         case ANALYTICS_ACTION_TYPES.GET_HISTORIC_DATA_REQUEST_SUCCESS: {
             const mapper = new AnalyticsMapper();
@@ -36,8 +36,8 @@ export const reducers = (state = initialState, action: any) => {
                 apiSuccess: true,
                 apiFailure: false,
                 apiRequestInProgress: false,
-                records: mapper.mapResponse(action.payload)
-            }
+                records: mapper.mapResponse(action.payload),
+            };
         }
         default:
             return state;

@@ -7,25 +7,28 @@ import { withRouter, useHistory } from 'react-router';
 
 export const Welcome = () => {
     const history = useHistory();
-    
+
     const routeToAnalytics = () => {
-        history.push("/analytics");
-    }
+        history.push('/analytics');
+    };
 
     return (
         <>
             <ContainerDiv>
-                <h2>
-                    Welcome to Cryptocurrency Price Analytics!
-                    </h2>
+                <h2>Welcome to Cryptocurrency Price Analytics</h2>
                 <div>
-                    <Button variant="contained" color="primary" startIcon={<ChevronRightIcon />} onClick={routeToAnalytics}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        startIcon={<ChevronRightIcon />}
+                        onClick={routeToAnalytics}
+                    >
                         Get Started
-                        </Button>
+                    </Button>
                 </div>
             </ContainerDiv>
         </>
     );
-}
+};
 
 export default withRouter(Welcome);

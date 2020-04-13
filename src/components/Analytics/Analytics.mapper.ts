@@ -1,32 +1,31 @@
-import { IHistoricDataAPIResponse, IQuote, IHistoricRecord } from '../../api/HistoricDataAPI.types';
-import { IDateWiseRecord, IProfitRecord } from './Analytics.types';
-import * as _ from "lodash";
+import { HistoricDataAPIResponse, Quote, HistoricRecord } from '../../api/HistoricDataAPI.types';
+import { DateWiseRecord, ProfitRecord } from './Analytics.types';
+import * as _ from 'lodash';
 
 export class AnalyticsMapper {
-
-    mapResponse(response: IHistoricDataAPIResponse): IDateWiseRecord[] {
-        let output: IDateWiseRecord[] = [];
-        response.records.map((eachRecord: IHistoricRecord) => {
-            const profitRecord: IProfitRecord = this.mapEachRecord(eachRecord);
-            let matchingDateRecord: IDateWiseRecord = _.find(output, {date: eachRecord.date});
+    mapResponse(response: HistoricDataAPIResponse): DateWiseRecord[] {
+        const output: DateWiseRecord[] = [];
+        response.records.forEach((eachRecord: HistoricRecord) => {
+            const profitRecord: ProfitRecord = this.mapEachRecord(eachRecord);
+            const matchingDateRecord: DateWiseRecord = _.find(output, { date: eachRecord.date });
             if (!!matchingDateRecord) {
                 matchingDateRecord.profitList.push(profitRecord);
             } else {
                 output.push({
                     date: eachRecord.date,
-                    profitList: [profitRecord]
-                })
+                    profitList: [profitRecord],
+                });
             }
         });
         return output;
     }
 
-    mapEachRecord(input: IHistoricRecord): IProfitRecord {
-        let potentialBuy: IQuote = {};
+    mapEachRecord(input: HistoricRecord): ProfitRecord {
+        const potentialBuy: Quote = {};
         let maxProfit;
-        let output: IProfitRecord = {
+        const output: ProfitRecord = {
             buyDetails: {},
-            sellDetails: {}
+            sellDetails: {},
         };
         output.currency = input.currency;
 
@@ -54,7 +53,7 @@ export class AnalyticsMapper {
                             this.assignQuote(output.sellDetails, input.quotes[i]);
                             maxProfit = output.sellDetails.price - output.buyDetails.price;
                             this.assignQuote(potentialBuy, undefined);
-                        }    
+                        }
                     } else {
                         // In an absence of potentialBuy.price, see if you need to redefine sellPrice
                         if (input.quotes[i].price - output.buyDetails.price > maxProfit) {
@@ -75,8 +74,8 @@ export class AnalyticsMapper {
         return output;
     }
 
-    assignQuote(fromQuote: IQuote, toQuote: IQuote) {
-        if (toQuote == undefined) {
+    assignQuote(fromQuote: Quote, toQuote: Quote) {
+        if (toQuote === undefined) {
             fromQuote.price = undefined;
             fromQuote.time = undefined;
         } else {

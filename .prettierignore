@@ -1,0 +1,6 @@
+package-lock.json
+yarn.lock
+.next
+node_modules/
+build/
+coverage/
