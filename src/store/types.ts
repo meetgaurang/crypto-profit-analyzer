@@ -1,8 +1,8 @@
-import { IDateWiseRecord } from "../components/Analytics/Analytics.types";
+import { DateWiseRecord } from '../components/Analytics/Analytics.types';
 
-export interface IAnalyticsStore {
-    apiSuccess: boolean,
-    apiFailure: boolean,
-    apiRequestInProgress: boolean,
-    records: IDateWiseRecord[];
+export interface AnalyticsStore {
+    apiSuccess: boolean;
+    apiFailure: boolean;
+    apiRequestInProgress: boolean;
+    records: DateWiseRecord[];
 }

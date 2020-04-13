@@ -1,15 +1,14 @@
-
-export interface IHistoricDataAPIResponse {
-    records: IHistoricRecord[];
+export interface HistoricDataAPIResponse {
+    records: HistoricRecord[];
 }
 
-export interface IHistoricRecord {
+export interface HistoricRecord {
     currency: string;
     date: string;
-    quotes: IQuote[];
+    quotes: Quote[];
 }
 
-export interface IQuote {
+export interface Quote {
     time?: string;
     price?: number;
 }

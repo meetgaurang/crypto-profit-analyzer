@@ -5,7 +5,7 @@ import { reducers } from './reducers';
 
 export function configureStore() {
     const rootReducer = combineReducers({
-        analyticsReducer: reducers
+        analyticsReducer: reducers,
     });
 
     const myCustomMiddleware = (store: any) => {
@@ -21,4 +21,3 @@ export function configureStore() {
 
     return createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, myCustomMiddleware)));
 }
-
