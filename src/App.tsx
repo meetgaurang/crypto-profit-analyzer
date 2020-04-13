@@ -18,23 +18,14 @@ export class App extends React.Component {
                         <IconButton edge="start" color="inherit" aria-label="menu">
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h6">
-                            Crypto Price Analytics
-                        </Typography>
+                        <Typography variant="h6">Crypto Price Analytics</Typography>
                     </Toolbar>
                 </AppBar>
                 <Provider store={store}>
                     <BrowserRouter basename="/crypto">
                         <Switch>
-                            <Route 
-                                path="/"
-                                exact={true}
-                                component={Welcome}
-                            />
-                            <Route 
-                                path="/analytics"
-                                component={Analytics}
-                            />
+                            <Route path="/" exact={true} component={Welcome} />
+                            <Route path="/analytics" component={Analytics} />
                         </Switch>
                     </BrowserRouter>
                 </Provider>

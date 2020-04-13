@@ -1,13 +1,12 @@
-import {IQuote} from "../../api/HistoricDataAPI.types";
+import { Quote } from '../../api/HistoricDataAPI.types';
 
-
-export interface IDateWiseRecord {
+export interface DateWiseRecord {
     date: string;
-    profitList: IProfitRecord[];
+    profitList: ProfitRecord[];
 }
-export interface IProfitRecord {
+export interface ProfitRecord {
     currency?: string;
-    buyDetails?: IQuote;
-    sellDetails?: IQuote;
+    buyDetails?: Quote;
+    sellDetails?: Quote;
     profit?: number;
 }
