@@ -1,5 +1,5 @@
 import { ANALYTICS_ACTION_TYPES } from './actionTypes';
-import { HistoricDataAPIResponse } from '../api/HistoricDataAPI.types';
+import { HistoricRecord } from '../api/HistoricDataAPI.types';
 import { HistoricDataAPI } from '../api/HistoricDataAPI';
 
 export function getHistoricDataReuestInProgress(): any {
@@ -8,7 +8,7 @@ export function getHistoricDataReuestInProgress(): any {
     };
 }
 
-export function getHistoricDataReuestSuccess(response: HistoricDataAPIResponse): any {
+export function getHistoricDataReuestSuccess(response: HistoricRecord[]): any {
     return {
         type: ANALYTICS_ACTION_TYPES.GET_HISTORIC_DATA_REQUEST_SUCCESS,
         payload: response,
@@ -25,9 +25,9 @@ export function getHistoricDataReuestError(error: any): any {
 export function getHistoricData(): any {
     return function (dispatch: any) {
         dispatch(getHistoricDataReuestInProgress());
-        return HistoricDataAPI.getMockedHistoricData()
-            .then((response: HistoricDataAPIResponse) => {
-                dispatch(getHistoricDataReuestSuccess(response));
+        return HistoricDataAPI.getHistoricData()
+            .then((response: any) => {
+                dispatch(getHistoricDataReuestSuccess(response.data));
             })
             .catch((error) => {
                 dispatch(getHistoricDataReuestError(error));

@@ -1,7 +1,3 @@
-export interface HistoricDataAPIResponse {
-    records: HistoricRecord[];
-}
-
 export interface HistoricRecord {
     currency: string;
     date: string;

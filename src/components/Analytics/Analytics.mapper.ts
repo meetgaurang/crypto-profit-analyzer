@@ -1,11 +1,11 @@
-import { HistoricDataAPIResponse, Quote, HistoricRecord } from '../../api/HistoricDataAPI.types';
+import { Quote, HistoricRecord } from '../../api/HistoricDataAPI.types';
 import { DateWiseRecord, ProfitRecord } from './Analytics.types';
 import * as _ from 'lodash';
 
 export class AnalyticsMapper {
-    mapResponse(response: HistoricDataAPIResponse): DateWiseRecord[] {
+    mapResponse(records: HistoricRecord[]): DateWiseRecord[] {
         const output: DateWiseRecord[] = [];
-        response.records.forEach((eachRecord: HistoricRecord) => {
+        records.forEach((eachRecord: HistoricRecord) => {
             const profitRecord: ProfitRecord = this.mapEachRecord(eachRecord);
             const matchingDateRecord: DateWiseRecord = _.find(output, { date: eachRecord.date });
             if (!!matchingDateRecord) {

@@ -30,7 +30,8 @@
     "eject": "react-scripts eject",
     "deploy": "aws s3 sync build/ s3://crypto-profit-analyzer",
     "lint": "./node_modules/.bin/eslint --ext .ts,.tsx . && echo 'Lint complete.'",
-    "lint:fix": "./node_modules/.bin/eslint --fix --ext .ts,.tsx . && echo 'Lint complete.'"
+    "lint:fix": "./node_modules/.bin/eslint --fix --ext .ts,.tsx . && echo 'Lint complete.'",
+    "mocks": "./node_modules/.bin/json-server --watch ./mocks/mockedResponse.json --port 4000"
   },
   "browserslist": {
     "production": [
@@ -64,6 +65,7 @@
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
+    "json-server": "^0.16.1",
     "prettier": "^2.0.4"
   },
   "jest": {
