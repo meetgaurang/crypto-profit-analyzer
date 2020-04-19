@@ -1,8 +1,10 @@
 import { AxiosError } from 'axios';
+import { Dispatch, Action } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 import { AnalyticsActionTypes } from './actionTypes';
 import { HistoricRecord } from '../api/HistoricDataAPI.types';
 import { HistoricDataAPI } from '../api/HistoricDataAPI';
-import { HistoricDataReuestType } from './types';
+import { HistoricDataReuestType, AnalyticsStore } from './types';
 
 export function getHistoricDataReuestInProgress(): HistoricDataReuestType {
     return {
@@ -25,8 +27,8 @@ export function getHistoricDataReuestError(errorMessage: string): HistoricDataRe
     };
 }
 
-export function getHistoricData(): any {
-    return function (dispatch: any) {
+export function getHistoricData(): ThunkAction<void, AnalyticsStore, null, Action<AnalyticsActionTypes>> {
+    return function (dispatch: Dispatch) {
         dispatch(getHistoricDataReuestInProgress());
         return HistoricDataAPI.getHistoricData()
             .then((response: HistoricRecord[]) => {
