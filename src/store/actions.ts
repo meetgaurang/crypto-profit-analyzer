@@ -1,24 +1,27 @@
+import { AxiosError } from 'axios';
 import { ANALYTICS_ACTION_TYPES } from './actionTypes';
 import { HistoricRecord } from '../api/HistoricDataAPI.types';
 import { HistoricDataAPI } from '../api/HistoricDataAPI';
+import { HistoricDataReuestType } from './types';
 
-export function getHistoricDataReuestInProgress(): any {
+export function getHistoricDataReuestInProgress(): HistoricDataReuestType {
     return {
         type: ANALYTICS_ACTION_TYPES.GET_HISTORIC_DATA_REQUEST_IN_PROGRESS,
+        payload: undefined
     };
 }
 
-export function getHistoricDataReuestSuccess(response: HistoricRecord[]): any {
+export function getHistoricDataReuestSuccess(response: HistoricRecord[]): HistoricDataReuestType {
     return {
         type: ANALYTICS_ACTION_TYPES.GET_HISTORIC_DATA_REQUEST_SUCCESS,
         payload: response,
     };
 }
 
-export function getHistoricDataReuestError(error: any): any {
+export function getHistoricDataReuestError(errorMessage: string): HistoricDataReuestType {
     return {
         type: ANALYTICS_ACTION_TYPES.GET_HISTORIC_DATA_REQUEST_FAILURE,
-        payload: error,
+        payload: errorMessage,
     };
 }
 
@@ -26,11 +29,11 @@ export function getHistoricData(): any {
     return function (dispatch: any) {
         dispatch(getHistoricDataReuestInProgress());
         return HistoricDataAPI.getHistoricData()
-            .then((response: any) => {
-                dispatch(getHistoricDataReuestSuccess(response.data));
+            .then((response: HistoricRecord[]) => {
+                dispatch(getHistoricDataReuestSuccess(response));
             })
-            .catch((error) => {
-                dispatch(getHistoricDataReuestError(error));
+            .catch((error: AxiosError) => {
+                dispatch(getHistoricDataReuestError(error.message));
             });
     };
 }
