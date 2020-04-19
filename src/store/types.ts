@@ -1,5 +1,6 @@
 import { DateWiseRecord } from '../components/Analytics/Analytics.types';
 import { HistoricRecord } from '../api/HistoricDataAPI.types';
+import { AnalyticsActionTypes } from './actionTypes';
 
 export interface AnalyticsStore {
     apiSuccess: boolean;
@@ -9,18 +10,22 @@ export interface AnalyticsStore {
     records: DateWiseRecord[];
 }
 
-interface HistoricDataReuestInProgressType {
-    type: string;
+interface HistoricDataReuestBaseAction {
+    type: AnalyticsActionTypes;
+}
+
+interface HistoricDataReuestInProgressType extends HistoricDataReuestBaseAction {
+    type: AnalyticsActionTypes.GET_HISTORIC_DATA_REQUEST_IN_PROGRESS;
     payload: undefined;
 }
 
-interface HistoricDataReuestSuccessType {
-    type: string;
+interface HistoricDataReuestSuccessType extends HistoricDataReuestBaseAction {
+    type: AnalyticsActionTypes.GET_HISTORIC_DATA_REQUEST_SUCCESS;
     payload: HistoricRecord[];
 }
 
-interface HistoricDataReuestErrorType {
-    type: string;
+interface HistoricDataReuestErrorType extends HistoricDataReuestBaseAction {
+    type: AnalyticsActionTypes.GET_HISTORIC_DATA_REQUEST_FAILURE;
     payload: string;
 }
 

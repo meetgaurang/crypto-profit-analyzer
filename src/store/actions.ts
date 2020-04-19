@@ -1,26 +1,26 @@
 import { AxiosError } from 'axios';
-import { ANALYTICS_ACTION_TYPES } from './actionTypes';
+import { AnalyticsActionTypes } from './actionTypes';
 import { HistoricRecord } from '../api/HistoricDataAPI.types';
 import { HistoricDataAPI } from '../api/HistoricDataAPI';
 import { HistoricDataReuestType } from './types';
 
 export function getHistoricDataReuestInProgress(): HistoricDataReuestType {
     return {
-        type: ANALYTICS_ACTION_TYPES.GET_HISTORIC_DATA_REQUEST_IN_PROGRESS,
+        type: AnalyticsActionTypes.GET_HISTORIC_DATA_REQUEST_IN_PROGRESS,
         payload: undefined
     };
 }
 
 export function getHistoricDataReuestSuccess(response: HistoricRecord[]): HistoricDataReuestType {
     return {
-        type: ANALYTICS_ACTION_TYPES.GET_HISTORIC_DATA_REQUEST_SUCCESS,
+        type: AnalyticsActionTypes.GET_HISTORIC_DATA_REQUEST_SUCCESS,
         payload: response,
     };
 }
 
 export function getHistoricDataReuestError(errorMessage: string): HistoricDataReuestType {
     return {
-        type: ANALYTICS_ACTION_TYPES.GET_HISTORIC_DATA_REQUEST_FAILURE,
+        type: AnalyticsActionTypes.GET_HISTORIC_DATA_REQUEST_FAILURE,
         payload: errorMessage,
     };
 }
