@@ -4,7 +4,7 @@ import { ThunkAction } from 'redux-thunk';
 import { AnalyticsActionTypes } from './actionTypes';
 import { HistoricRecord } from '../api/HistoricDataAPI.types';
 import { HistoricDataAPI } from '../api/HistoricDataAPI';
-import { HistoricDataReuestType, AnalyticsStore } from './types';
+import { HistoricDataReuestType, AnalyticsStore, AppState } from './types';
 
 export function getHistoricDataReuestInProgress(): HistoricDataReuestType {
     return {
@@ -27,7 +27,7 @@ export function getHistoricDataReuestError(errorMessage: string): HistoricDataRe
     };
 }
 
-export function getHistoricData(): ThunkAction<void, AnalyticsStore, null, Action<AnalyticsActionTypes>> {
+export function getHistoricData(): ThunkAction<void, AppState, null, Action<AnalyticsActionTypes>> {
     return function (dispatch: Dispatch) {
         dispatch(getHistoricDataReuestInProgress());
         return HistoricDataAPI.getHistoricData()

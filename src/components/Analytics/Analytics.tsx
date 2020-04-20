@@ -137,7 +137,7 @@ const mapStateToProps = (state: AppState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: Function) => ({
     getHistoricData: () => {
         dispatch(getHistoricData());
     },
