@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -14,12 +14,11 @@ import ETH from '@iconify/icons-cryptocurrency/eth';
 import ETC from '@iconify/icons-cryptocurrency/etc';
 
 import { getHistoricData } from '../../store/actions';
-import { DateWiseRecord, ProfitRecord } from './Analytics.types';
+import { DateWiseRecord, ProfitRecord, AnalyticsProps } from './Analytics.types';
 import { DateBarDiv, CustomGrid } from './Analytics.styles';
 import { AppState } from '../../store/types';
-import { Dispatch } from 'redux';
 
-export const Analytics = (props: any) => {
+export const Analytics = (props: AnalyticsProps) => {
     useEffect(() => {
         props.getHistoricData();
     }, []);
@@ -122,7 +121,7 @@ export const Analytics = (props: any) => {
     return (
         <>
             {props.apiSuccess && <div>{renderRecords()}</div>}
-            {props.apiFailure && <div>API call failed</div>}
+            {props.apiFailure && <div>{props.apiFailureMessage}</div>}
             {props.apiRequestInProgress && <div>Loading..</div>}
         </>
     );
@@ -133,7 +132,8 @@ const mapStateToProps = (state: AppState) => {
         apiSuccess: state.analyticsReducer.apiSuccess,
         apiFailure: state.analyticsReducer.apiFailure,
         apiRequestInProgress: state.analyticsReducer.apiRequestInProgress,
-        records: state.analyticsReducer.records,
+        apiFailureMessage: state.analyticsReducer.apiFailureMessage,
+        records: state.analyticsReducer.records
     };
 };
 
