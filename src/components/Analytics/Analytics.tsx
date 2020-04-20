@@ -16,6 +16,8 @@ import ETC from '@iconify/icons-cryptocurrency/etc';
 import { getHistoricData } from '../../store/actions';
 import { DateWiseRecord, ProfitRecord } from './Analytics.types';
 import { DateBarDiv, CustomGrid } from './Analytics.styles';
+import { AppState } from '../../store/types';
+import { Dispatch } from 'redux';
 
 export const Analytics = (props: any) => {
     useEffect(() => {
@@ -121,21 +123,21 @@ export const Analytics = (props: any) => {
         <>
             {props.apiSuccess && <div>{renderRecords()}</div>}
             {props.apiFailure && <div>API call failed</div>}
-            {props.apiReuestInProgress && <div>Loading..</div>}
+            {props.apiRequestInProgress && <div>Loading..</div>}
         </>
     );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: AppState) => {
     return {
         apiSuccess: state.analyticsReducer.apiSuccess,
         apiFailure: state.analyticsReducer.apiFailure,
-        apiReuestInProgress: state.analyticsReducer.apiReuestInProgress,
+        apiRequestInProgress: state.analyticsReducer.apiRequestInProgress,
         records: state.analyticsReducer.records,
     };
 };
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
     getHistoricData: () => {
         dispatch(getHistoricData());
     },

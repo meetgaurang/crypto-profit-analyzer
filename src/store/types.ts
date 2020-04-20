@@ -2,6 +2,10 @@ import { DateWiseRecord } from '../components/Analytics/Analytics.types';
 import { HistoricRecord } from '../api/HistoricDataAPI.types';
 import { AnalyticsActionTypes } from './actionTypes';
 
+export interface AppState {
+    analyticsReducer: AnalyticsStore;
+}
+
 export interface AnalyticsStore {
     apiSuccess: boolean;
     apiFailure: boolean;
