@@ -4,7 +4,8 @@ import { ThunkAction } from 'redux-thunk';
 import { AnalyticsActionTypes } from './actionTypes';
 import { HistoricRecord } from '../api/HistoricDataAPI.types';
 import { HistoricDataAPI } from '../api/HistoricDataAPI';
-import { HistoricDataReuestType, AnalyticsStore, AppState } from './types';
+import { HistoricDataReuestType } from './types';
+import { AppState } from '../../../store/types';
 
 export function getHistoricDataReuestInProgress(): HistoricDataReuestType {
     return {
@@ -16,14 +17,14 @@ export function getHistoricDataReuestInProgress(): HistoricDataReuestType {
 export function getHistoricDataReuestSuccess(response: HistoricRecord[]): HistoricDataReuestType {
     return {
         type: AnalyticsActionTypes.GET_HISTORIC_DATA_REQUEST_SUCCESS,
-        payload: response,
+        payload: response
     };
 }
 
 export function getHistoricDataReuestError(errorMessage: string): HistoricDataReuestType {
     return {
         type: AnalyticsActionTypes.GET_HISTORIC_DATA_REQUEST_FAILURE,
-        payload: errorMessage,
+        payload: errorMessage
     };
 }
 

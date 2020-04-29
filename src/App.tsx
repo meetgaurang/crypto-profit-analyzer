@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
-import { Welcome } from './components/Welcome/Welcome';
-import Analytics from './components/Analytics/Analytics';
+import { WelcomeComponent } from './modules/welcome';
+import { AnalyticsComponent } from './modules/analytics';
 import { configureStore } from './store/configureStore';
 
 export const App = () => {
@@ -23,12 +23,11 @@ export const App = () => {
             <Provider store={store}>
                 <HashRouter>
                     <Switch>
-                        <Route path="/" exact={true} component={Welcome} />
-                        <Route path="/analytics" component={Analytics} />
+                        <Route path="/" exact={true} component={WelcomeComponent} />
+                        <Route path="/analytics" component={AnalyticsComponent} />
                     </Switch>
                 </HashRouter>
             </Provider>
         </>
     );
-}
-
+};

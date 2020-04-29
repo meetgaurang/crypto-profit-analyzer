@@ -1,14 +1,13 @@
 import { AnalyticsStore, HistoricDataReuestType } from './types';
 import { AnalyticsActionTypes } from './actionTypes';
 import { AnalyticsMapper } from '../components/Analytics/Analytics.mapper';
-import { HistoricRecord } from '../api/HistoricDataAPI.types';
 
 const initialState: AnalyticsStore = {
     apiSuccess: false,
     apiFailure: false,
     apiRequestInProgress: false,
     apiFailureMessage: '',
-    records: [],
+    records: []
 };
 
 export const reducers = (state = initialState, action: HistoricDataReuestType) => {
@@ -20,7 +19,7 @@ export const reducers = (state = initialState, action: HistoricDataReuestType) =
                 apiFailure: false,
                 apiRequestInProgress: true,
                 apiFailureMessage: '',
-                records: [],
+                records: []
             };
         }
         case AnalyticsActionTypes.GET_HISTORIC_DATA_REQUEST_FAILURE: {
@@ -30,7 +29,7 @@ export const reducers = (state = initialState, action: HistoricDataReuestType) =
                 apiFailure: true,
                 apiRequestInProgress: false,
                 apiFailureMessage: action.payload,
-                records: [],
+                records: []
             };
         }
         case AnalyticsActionTypes.GET_HISTORIC_DATA_REQUEST_SUCCESS: {
@@ -41,7 +40,7 @@ export const reducers = (state = initialState, action: HistoricDataReuestType) =
                 apiFailure: false,
                 apiRequestInProgress: false,
                 apiFailureMessage: '',
-                records: mapper.mapResponse(action.payload),
+                records: mapper.mapResponse(action.payload)
             };
         }
         default:

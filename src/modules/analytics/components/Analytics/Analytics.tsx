@@ -1,4 +1,4 @@
-import React, { useEffect, FunctionComponent } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -16,7 +16,7 @@ import ETC from '@iconify/icons-cryptocurrency/etc';
 import { getHistoricData } from '../../store/actions';
 import { DateWiseRecord, ProfitRecord, AnalyticsProps } from './Analytics.types';
 import { DateBarDiv, CustomGrid } from './Analytics.styles';
-import { AppState } from '../../store/types';
+import { AppState } from '../../../../store/types';
 
 export const Analytics = (props: AnalyticsProps) => {
     useEffect(() => {
@@ -140,7 +140,7 @@ const mapStateToProps = (state: AppState) => {
 const mapDispatchToProps = (dispatch: Function) => ({
     getHistoricData: () => {
         dispatch(getHistoricData());
-    },
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Analytics);

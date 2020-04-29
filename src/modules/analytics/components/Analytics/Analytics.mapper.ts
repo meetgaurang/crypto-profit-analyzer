@@ -13,7 +13,7 @@ export class AnalyticsMapper {
             } else {
                 output.push({
                     date: eachRecord.date,
-                    profitList: [profitRecord],
+                    profitList: [profitRecord]
                 });
             }
         });
@@ -25,7 +25,7 @@ export class AnalyticsMapper {
         let maxProfit;
         const output: ProfitRecord = {
             buyDetails: {},
-            sellDetails: {},
+            sellDetails: {}
         };
         output.currency = input.currency;
 
