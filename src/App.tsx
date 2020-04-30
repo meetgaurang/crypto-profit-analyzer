@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, FunctionComponent } from 'react';
 import { Switch, Route, HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
@@ -8,7 +8,7 @@ import { WelcomeComponent } from './modules/welcome';
 import { AnalyticsComponent } from './modules/analytics';
 import { configureStore } from './store/configureStore';
 
-export const App = () => {
+export const App: FunctionComponent = (): ReactElement => {
     const store = configureStore();
     return (
         <>

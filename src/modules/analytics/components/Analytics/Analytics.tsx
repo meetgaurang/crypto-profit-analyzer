@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -18,12 +18,12 @@ import { DateWiseRecord, ProfitRecord, AnalyticsProps } from './Analytics.types'
 import { DateBarDiv, CustomGrid } from './Analytics.styles';
 import { AppState } from '../../../../store/types';
 
-export const Analytics = (props: AnalyticsProps) => {
+export const Analytics: FunctionComponent<AnalyticsProps> = (props: AnalyticsProps): ReactElement => {
     useEffect(() => {
         props.getHistoricData();
     }, []);
 
-    const iconMapping = (currency: string) => {
+    const iconMapping = (currency: string): ReactElement => {
         switch (currency) {
             case 'BTC': {
                 return <Icon icon={BTC} width="2em" height="2em" />;
@@ -40,7 +40,7 @@ export const Analytics = (props: AnalyticsProps) => {
         }
     };
 
-    const renderCurrencyList = (profitList: ProfitRecord[]) => {
+    const renderCurrencyList = (profitList: ProfitRecord[]): ReactElement[] => {
         return profitList.map((eachProfitItem: ProfitRecord, index: number) => {
             return (
                 <Grid item xs={12} sm={4} md={3} lg={3} xl={2} key={index}>
@@ -102,7 +102,7 @@ export const Analytics = (props: AnalyticsProps) => {
         });
     };
 
-    const renderRecords = () => {
+    const renderRecords = (): ReactElement[] => {
         return props.records.map((eachRecord: DateWiseRecord, index: number) => {
             return (
                 <div key={index}>

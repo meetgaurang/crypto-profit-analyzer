@@ -74,7 +74,7 @@ export class AnalyticsMapper {
         return output;
     }
 
-    assignQuote(fromQuote: Quote, toQuote: Quote) {
+    assignQuote(fromQuote: Quote, toQuote: Quote): void {
         if (toQuote === undefined) {
             fromQuote.price = undefined;
             fromQuote.time = undefined;
