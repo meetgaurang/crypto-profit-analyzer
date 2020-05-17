@@ -31,7 +31,7 @@
     "deploy": "aws s3 sync build/ s3://crypto-profit-analyzer",
     "lint": "./node_modules/.bin/eslint --ext .ts,.tsx . && echo 'Lint complete.'",
     "lint:fix": "./node_modules/.bin/eslint --fix --ext .ts,.tsx . && echo 'Lint complete.'",
-    "mocks": "./node_modules/.bin/json-server --watch ./mocks/mockedResponse.json --port 4000"
+    "mocks": "./node_modules/.bin/json-server --watch ./mocks/mockedResponse.json --host 0.0.0.0 --port 4000"
   },
   "browserslist": {
     "production": [
