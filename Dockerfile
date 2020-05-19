@@ -1,13 +1,6 @@
-# Docker Image which is used as foundation to create
-# a custom Docker Image with this Dockerfile
 FROM node:12.16.2-alpine3.11
-
 WORKDIR /usr/app
-
 COPY package*.json ./
-
 RUN npm install
-
 COPY . .
-
 CMD ["npm", "run", "start"]
