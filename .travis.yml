@@ -7,3 +7,13 @@ before_install:
 
 script:
     - docker run -e CI=true crypto_web:dev npm run test
+
+deploy:
+    provider: elasticbeanstalk
+    region: "us-west-2"
+    app: "docker-react"
+    env: "DockerReact-env"
+    bucker_name: "elasticbeanstalk-us-west-2-466504088256"
+    bucket_path: "docker-react"
+    on:
+        branch: dockerize-app
