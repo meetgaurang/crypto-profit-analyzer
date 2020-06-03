@@ -4,6 +4,7 @@ WORKDIR /usr/buildstep
 COPY package*.json ./
 RUN npm install
 COPY . .
+RUN npm run test:nowatch
 RUN npm run build
 
 #Step.2: Deploy 'build' dir on nginx server
