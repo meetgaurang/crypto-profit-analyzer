@@ -5,9 +5,6 @@ services:
 before_install:
     - docker build -t crypto_web:prod -f Dockerfile.prod .
 
-script:
-    - docker run -e CI=true crypto_web:prod npm run test
-
 deploy:
     provider: elasticbeanstalk
     region: "us-west-2"
