@@ -10,7 +10,7 @@ name: Build Pipeline
       - master
 
 jobs:
-  Test:
+  CI-CD:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,6 +27,9 @@ jobs:
 
       - name: Run test
         run: yarn test
+        
+      - name: Build
+        run: yarn build
         
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
