@@ -47,7 +47,7 @@ describe('AnalyticsMapper', () => {
                 ],
             };
 
-            const records: DateWiseRecord[] = mapper.mapResponse(response);
+            const records: DateWiseRecord[] = mapper.mapResponse(response.records);
             expect(records.length).toEqual(2);
             expect(records[0].date).toEqual('20180507');
             expect(records[0].profitList.length).toEqual(3);
