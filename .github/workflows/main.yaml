@@ -23,7 +23,7 @@ jobs:
           node-version: 16.13.1
 
       - name: Install dependencies
-        run: yarn install
+        run: npm i
 
       - name: Run test
         run: yarn test
