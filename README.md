@@ -1,3 +1,7 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/47a04692-5980-4139-9c6e-b2e3c0c34e76/deploy-status)](https://app.netlify.com/sites/crypto-profit-analyzer/deploys) [![Build Status](https://github.com/meetgaurang/crypto-profit-analyzer/actions/workflows/main.yaml/badge.svg)](https://github.com/meetgaurang/crypto-profit-analyzer/actions)
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
