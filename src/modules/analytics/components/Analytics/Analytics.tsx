@@ -18,10 +18,17 @@ import { DateWiseRecord, ProfitRecord, AnalyticsProps } from './Analytics.types'
 import { DateBarDiv, CustomGrid } from './Analytics.styles';
 import { AppState } from '../../../../store/types';
 
-export const Analytics: FunctionComponent<AnalyticsProps> = (props: AnalyticsProps): ReactElement => {
+export const Analytics: FunctionComponent<AnalyticsProps> = ({
+    getHistoricData,
+    apiSuccess,
+    apiFailure,
+    records,
+    apiFailureMessage,
+    apiRequestInProgress
+}: AnalyticsProps): ReactElement => {
     useEffect(() => {
-        props.getHistoricData();
-    }, []);
+        getHistoricData();
+    }, [getHistoricData]);
 
     const iconMapping = (currency: string): ReactElement => {
         switch (currency) {
@@ -103,7 +110,7 @@ export const Analytics: FunctionComponent<AnalyticsProps> = (props: AnalyticsPro
     };
 
     const renderRecords = (): ReactElement[] => {
-        return props.records.map((eachRecord: DateWiseRecord, index: number) => {
+        return records.map((eachRecord: DateWiseRecord, index: number) => {
             return (
                 <div key={index}>
                     <DateBarDiv>
@@ -120,9 +127,9 @@ export const Analytics: FunctionComponent<AnalyticsProps> = (props: AnalyticsPro
 
     return (
         <>
-            {props.apiSuccess && <div>{renderRecords()}</div>}
-            {props.apiFailure && <div>{props.apiFailureMessage}</div>}
-            {props.apiRequestInProgress && <div>Loading..</div>}
+            {apiSuccess && <div>{renderRecords()}</div>}
+            {apiFailure && <div>{apiFailureMessage}</div>}
+            {apiRequestInProgress && <div>Loading..</div>}
         </>
     );
 };
